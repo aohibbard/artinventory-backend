@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 // give name
 mongoose.connect('mongodb://localhost/artworks')
-    .then(() => console.log('Connected to MongoDB')
-    .catch(err => console.error('Could not connect to MongoDB', err));
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log('Could not connect to MongoDB', err));
 
 const artworkSchema = new mongoose.Schema({
     artist: String,
@@ -22,5 +22,5 @@ async function createArtwork(){
     const artwork = new Artwork();
 
     const result = await artwork.save();
-    
+
 }
