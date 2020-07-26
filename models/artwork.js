@@ -6,12 +6,12 @@ mongoose.connect('mongodb://localhost/artworks')
     .catch(err => console.log('Could not connect to MongoDB', err));
 
 const artworkSchema = new mongoose.Schema({
-    artist: String,
-    title: String,
-    year: Integer,
+    artist: { type: String, required: true},
+    title: { type: String, required: true },
+    year: { type: Number, required: true },
     medium: String,
-    price: Integer,
-    ntoes: String,
+    price: Number,
+    notes: String,
     tags: [ String ],
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
