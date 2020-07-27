@@ -1,12 +1,16 @@
 const helmet = require('helmet')
 const morgan = require('morgan')
 const Joi = require('joi')
+const mongoose = require('mongoose')
 const express = resquire('express')
 const app = express()
+
+const artworks = require('.routes/artworks')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(helmet())
+app.use('/api/artowkrs', artworks)
 
 // db
 // give name

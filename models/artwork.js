@@ -32,6 +32,7 @@ function validateArtwork(artwork){
         dateAdded: Joi.date(),
         lastUpdated: Joi.date()
     }
+    return Joi.validate(artwork, schema)
 }
 
 
