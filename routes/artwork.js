@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { Artwork, validate } = require('../models/artwork');
+const { Artist } = require('../models/artist')
 const router = express.Router();
 
 // INDEX
@@ -14,8 +15,14 @@ router.post('/', async (req, res) => {
     const artworks = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
+    const artist = await Artist.findById(req.body.artistId)
+    if (!artist) res.status(400).send('Invalid artist')
+
     let artwork = new Artwork({
-        artist: req.body.artist,
+        artist: {
+            _id: artist._id,
+            name: artist.name
+        },
         title: req.body.title,
         year: req.body.year,
         medium: req.body.medium,
@@ -30,8 +37,17 @@ router.post('/', async (req, res) => {
 
 // PUT
 router.put('/:id', async (res, req) => {
+    const artworks = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const artist = await Artist.findById(req.body.artistId)
+    if (!artist) res.status(400).send('Invalid artist')
+
     const artwork = await Artwork.findByIdAndUpdate(req.params.id, {
-        artist: req.body.artist,
+        artist: {
+            _id: artist.id,
+            name: artist.name
+        },
         title: req.body.title,
         year: req.body.year,
         medium: req.body.medium,
