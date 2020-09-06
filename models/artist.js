@@ -5,10 +5,10 @@ const artistSchema = new mongoose.Schema({
     name: { 
         type: String,
         required: true,
-        minLength: 3},
+        minLength: 3
+    },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
-    }
 });
 
 const Artist = mongoose.model('Artist', artistSchema);
