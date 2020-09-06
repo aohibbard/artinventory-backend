@@ -5,12 +5,14 @@ const mongoose = require('mongoose')
 const express = resquire('express')
 const app = express()
 
-const artworks = require('.routes/artworks')
+const artworks = require('./routes/artwork')
+const artist = require('./routes/artist')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(helmet())
-app.use('/api/artowkrs', artworks)
+app.use('/api/artworks', artworks)
+app.use('/api/artist', artist)
 
 // db
 // give name
