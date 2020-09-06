@@ -48,3 +48,5 @@ router.delete(':/id', async (req, res) => {
     if (!artist) return res.status(404).send('The artist with that ID was not found');
     res.send(artist)
 })
+
+module.exports = router;
