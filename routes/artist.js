@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const {Artist, validate} = require('../models/artist')
 
 // index
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     const artists = await Artist.find().sort('name');
     res.send(artists);
 });

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const artworks = await Artwork.find.sort('dateAdded');
     res.send(artworks);
-})
+});
 
 // POST
 router.post('/', async (req, res) => {

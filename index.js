@@ -1,7 +1,7 @@
 const helmet = require('helmet')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-const express = resquire('express')
+const express = require('express')
 const app = express()
 
 const artworks = require('./routes/artwork')
