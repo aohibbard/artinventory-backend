@@ -1,6 +1,5 @@
 const helmet = require('helmet')
 const morgan = require('morgan')
-const Joi = require('joi')
 const mongoose = require('mongoose')
 const express = resquire('express')
 const app = express()
