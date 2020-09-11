@@ -5,7 +5,8 @@ const artistSchema = new mongoose.Schema({
     name: { 
         type: String,
         required: true,
-        minLength: 3
+        minLength: 3,
+        maxLength: 255
     },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now },
