@@ -5,6 +5,8 @@ const { Artwork, validate } = require('../models/artwork');
 const { Artist } = require('../models/artist')
 const router = express.Router();
 
+Fawn.init(mongoose);
+
 // INDEX
 router.get('/', async (req, res) => {
     const artworks = await Artwork.find.sort('dateAdded');
@@ -61,6 +63,20 @@ router.put('/:id', async (res, req) => {
     );
     if (!artwork) return res.status(404).send("Artwork not found")
     if (error) return res.status(400).send(error.details[0].message)
+
+    try {
+        new Fawn.Task()
+            .save('artworks', artwork) // case sensitive, pass actual name of collection
+            .update('artist', {_id: artist.id}, {
+                //  $inc: {numberInStock: -1}
+            })
+        .run(); // need to call run 
+    }
+    catch(ex) {
+        res.status(500).send('Something went wrong')
+    }
+
+
     res.send(artwork)
 })
 
