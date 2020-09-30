@@ -18,3 +18,18 @@ const Exhibition = mongoose.model('Exhibition', new mongoose.Schema({
     lastUpdated: { type: Date, default: Date.now }
 
 }))
+
+// add artwork
+function validateExhibition(exhibition){
+    const schema = {
+        name: Joi.string.min(5).max(200).required(),
+        startDate: Joi.date.required(),
+        endDate: Joi.date.required(),
+        location: Joi.string.required(),
+        city: Joi.string()
+    }
+    return Joi.validate(exhibition, schema)
+}
+
+exports.Exhibition = Exhibition;
+exports.valdiate = validateExhibition;
