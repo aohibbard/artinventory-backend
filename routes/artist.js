@@ -13,14 +13,13 @@ router.get('/', async (req, res) => {
 // post
 router.post('/', async(req, res) => {
     const {error} = validateArtist(req.body);
-    if (error) console.log("Error", res.status(400).send(error.details[0].message) )
+    if (error) res.status(400).send(error.details[0].message)
     let artist = new Artist({
         name: req.body.name,
         dateAdded: req.body.dateAdded,
         lastUpdated: req.body.lastUpdated
     });
     artist = await artist.save();
-    console.log(artist)
     res.send(artist)
 });
 
@@ -36,7 +35,7 @@ router.put('/:id', async (req, res) => {
     const { error } = validateArtist(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const artist = await Artist.findById(req.params.id, {name: req.body.name, lastUpdated: Date.now()}, {
+    const artist = await Artist.findByIdAndUpdate(req.params.id, {name: req.body.name, lastUpdated: Date.now()}, {
         new: true
     })
     if (!artist) return res.status(404).send('The artist with that ID was not found');

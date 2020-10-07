@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 // POST
 router.post('/', async (req, res) => {
-    const artworks = validate(req.body);
+    const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     const artist = await Artist.findById(req.body.artistId)
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 
 // PUT
 router.put('/:id', async (res, req) => {
-    const artworks = validate(req.body);
+    const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     const artist = await Artist.findById(req.body.artistId)

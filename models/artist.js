@@ -15,12 +15,12 @@ const artistSchema = new mongoose.Schema({
 const Artist = mongoose.model('Artist', artistSchema);
 
 function validateArtist(artist){
-    const schema = {
-        name: Joi.string.min(3).required(),
+    const schema = Joi.object({
+        name: Joi.string().min(3).required(),
         dateAdded: Joi.date(),
         lastUpdated: Joi.date()
-    }
-    return Joi.validate(artist, schema)
+    })
+    return schema.validate(artist)
 }
 
 exports.artistSchema = artistSchema;

@@ -16,27 +16,27 @@ const Artwork = mongoose.model('Artwork', new mongoose.Schema({
     year: { type: Number, required: true },
     medium: String,
     dimensions: String,
-    price: Number,
-    notes: String,
-    editionNo: Number,
-    editionSize: Number,
+    price: {type: String, default: null},
+    notes: {type: String, default: null},
+    editionNo: {type: Number, default: null},
+    editionSize: {type: Number, default: null},
     tags: [ String ],
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
 }));
 
 function validateArtwork(artwork){
-    const schema = {
-        artistId: Joi.string.required(),
-        title: Joi.string.min(2).max(300).required(),
-        year: Joi.number.required(),
+    // artistId: Joi.string().required(),
+    const schema = Joi.object({
+        title: Joi.string().min(2).max(300).required(),
+        year: Joi.number().required(),
         medium: Joi.string(),
         dimensions: Joi.string(),
         editionNo: Joi.number(),
         editionSize: Joi.number(),
         tags: Joi.array().items({ a: Joi.string() })
-    }
-    return Joi.validate(artwork, schema)
+    })
+    return schema.validate(artwork)
 }
 
 // function showArtwork(){
