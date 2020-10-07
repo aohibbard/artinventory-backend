@@ -6,10 +6,10 @@ const app = express()
 
 const artworks = require('./routes/artwork')
 const artist = require('./routes/artist')
-const exhibition = require('./routes/exhibition')
+// const exhibition = require('./routes/exhibition')
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(helmet())
 app.use('/api/artworks', artworks)
 app.use('/api/artist', artist)
