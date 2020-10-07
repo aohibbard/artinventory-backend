@@ -2,6 +2,7 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 const artworks = require('./routes/artwork')
@@ -10,7 +11,8 @@ const artist = require('./routes/artist')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(helmet())
+app.use(cors());
+app.use(helmet());
 app.use('/api/artworks', artworks)
 app.use('/api/artist', artist)
 
