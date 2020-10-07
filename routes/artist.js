@@ -14,13 +14,13 @@ router.get('/', async (req, res) => {
 router.post('/', async(req, res) => {
     const {error} = validateArtist(req.body);
     if (error) console.log("Error", res.status(400).send(error.details[0].message) )
-
     let artist = new Artist({
-        artist: req.body.name,
+        name: req.body.name,
         dateAdded: req.body.dateAdded,
         lastUpdated: req.body.lastUpdated
     });
     artist = await artist.save();
+    console.log(artist)
     res.send(artist)
 });
 
