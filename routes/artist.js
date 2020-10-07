@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
 
-const {Artist, validate} = require('../models/artist')
+const {Artist, validateArtist} = require('../models/artist')
 
 // index
 router.get('/', async (req, res) => {
@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 
 // post
 router.post('/', async(req, res) => {
-    const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message)
+    const {error} = validateArtist(req.body);
+    if (error) console.log("Error", res.status(400).send(error.details[0].message) )
 
     let artist = new Artist({
         artist: req.body.name,
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
 
 // put 
 router.put('/:id', async (req, res) => {
-    const { error } = validate(req.body);
+    const { error } = validateArtist(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     const artist = await Artist.findById(req.params.id, {name: req.body.name, lastUpdated: Date.now()}, {
