@@ -13,6 +13,15 @@ router.get('/', async (req, res) => {
     res.send(artworks);
 });
 
+var missingNumber = function(nums) {
+    let numSet = new Set(nums)
+    for(let i=0; i<=nums.length; i++){
+        if(! numSet.has(i)){
+            return i
+        }
+    }
+};
+
 // POST
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);

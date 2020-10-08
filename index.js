@@ -18,7 +18,9 @@ app.use('/api/artist', artist)
 
 // db
 // give name
-mongoose.connect('mongodb://localhost/artinv')
+mongoose.connect('mongodb://localhost/artinv', {
+    useNewUrlParser: true,
+    })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log('Could not connect to MongoDB', err));
 
