@@ -6,11 +6,6 @@ const {artistSchema} = require('./artist')
 // see https://bezkoder.com/mongoose-one-to-many-relationship/#Model_One-to-Many_Relationships_in_MongoDB
 
 const artworkSchema = new mongoose.Schema({
-    artist: { 
-        type: artistSchema,
-        required: true,
-        ref: "artist"
-    },
     title: {
         type: String,
         required: true,
