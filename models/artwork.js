@@ -4,7 +4,8 @@ const {artistSchema} = require('./artist')
 
 // for artist consider "type: mongoose.Schema.Types.ObjectId"
 // see https://bezkoder.com/mongoose-one-to-many-relationship/#Model_One-to-Many_Relationships_in_MongoDB
-const Artwork = mongoose.model('Artwork', new mongoose.Schema({
+
+const artworkSchema = new mongoose.Schema({
     artist: { 
         type: artistSchema,
         required: true,
@@ -26,7 +27,10 @@ const Artwork = mongoose.model('Artwork', new mongoose.Schema({
     tags: [ String ],
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
-}));
+})
+
+
+const Artwork = mongoose.model('Artwork', artworkSchema);
 
 function validateArtwork(artwork){
     // artistId: Joi.string().required(),
@@ -60,3 +64,4 @@ function validateArtwork(artwork){
 
 exports.Artwork = Artwork;
 exports.validate = validateArtwork;
+exports.artworkSchema = artworkSchema;
