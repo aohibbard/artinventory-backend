@@ -8,6 +8,10 @@ const artistSchema = new mongoose.Schema({
         minLength: 3,
         maxLength: 255
     },
+    artwork: {
+        type: Schema.Types.ArtworkId,
+        ref: "Artwork"
+    },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now },
 });
