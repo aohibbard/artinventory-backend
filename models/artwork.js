@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
-const {artistSchema} = require('./artist')
 
 // for artist consider "type: mongoose.Schema.Types.ObjectId"
 // see https://bezkoder.com/mongoose-one-to-many-relationship/#Model_One-to-Many_Relationships_in_MongoDB

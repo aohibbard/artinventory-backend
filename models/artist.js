@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const {artworkSchema} = require('./artwork')
+const { artworkSchema } = require('./artwork')
 
 const artistSchema = new mongoose.Schema({
     name: { 
@@ -9,10 +9,10 @@ const artistSchema = new mongoose.Schema({
         minLength: 3,
         maxLength: 255
     },
-    artwork: {
-        type: Schema.Types.ArtworkId,
-        ref: "Artwork",
-        required: "false"
+    artworks: {
+        type: artworkSchema,
+        required: false,
+        ref: "artwork"
     },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now },
