@@ -20,14 +20,10 @@ router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const artist = await Artist.findById(req.body.artistId)
-    if (!artist) res.status(400).send('Invalid artist')
+    // const artist = await Artist.findById(req.body.artistId)
+    // if (!artist) res.status(400).send('Invalid artist')
 
     let artwork = new Artwork({
-        artist: {
-            _id: artist._id,
-            name: artist.name
-        },
         title: req.body.title,
         year: req.body.year,
         medium: req.body.medium,
@@ -45,14 +41,7 @@ router.put('/:id', async (res, req) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const artist = await Artist.findById(req.body.artistId)
-    if (!artist) res.status(400).send('Invalid artist')
-
     const artwork = await Artwork.findByIdAndUpdate(req.params.id, {
-        artist: {
-            _id: artist.id,
-            name: artist.name
-        },
         title: req.body.title,
         year: req.body.year,
         medium: req.body.medium,
