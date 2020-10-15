@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { artworkSchema } = require('./artwork')
+const { validateArtwork, artworkSchema } = require('./artwork')
 
 const artistSchema = new mongoose.Schema({
     name: { 
@@ -23,6 +23,7 @@ const Artist = mongoose.model('Artist', artistSchema);
 function validateArtist(artist){
     const schema = Joi.object({
         name: Joi.string().min(3).required(),
+        artworks: Joi.any(),
         dateAdded: Joi.date(),
         lastUpdated: Joi.date()
     })
@@ -32,3 +33,12 @@ function validateArtist(artist){
 exports.artistSchema = artistSchema;
 exports.Artist = Artist;
 exports.validateArtist = validateArtist;
+
+/*
+artworks: {
+    title: "Vanishing Act",
+    year: 1997,
+    medium: "Etching and aquatint with chine collé",
+    dimensions: "plate: 11 7/8 x 8 7/8",
+}
+*/

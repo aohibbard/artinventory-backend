@@ -32,8 +32,8 @@ router.get('/:id', async (req, res) => {
 
 // put 
 router.put('/:id', async (req, res) => {
-    const { error } = validateArtist(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    // const { error } = validateArtist(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
 
     const artist = await Artist.findByIdAndUpdate(req.params.id, {name: req.body.name, lastUpdated: Date.now()}, {
         new: true

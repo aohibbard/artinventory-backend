@@ -12,12 +12,12 @@ const artworkSchema = new mongoose.Schema({
         maxLength: 300
     },
     year: { type: Number, required: true },
-    medium: String,
-    dimensions: String,
-    price: {type: String, default: null},
-    notes: {type: String, default: null},
-    editionNo: {type: Number, default: null},
-    editionSize: {type: Number, default: null},
+    medium: {type: String, required: false, default: null},
+    dimensions: {type: String, required: false, default: null},
+    price: {type: String, default: null, required: false},
+    notes: {type: String, default: null, required: false},
+    editionNo: {type: Number, default: null, required: false},
+    editionSize: {type: Number, default: null, required: false},
     tags: [ String ],
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
