@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Fawn = require('Fawn')
 const { Exhibition, validate } = require('../models/exhibition');
+const { Artwork } = require('../models/artwork');
 const router = express.Router();
 
 Fawn.init(mongoose);
@@ -12,12 +13,14 @@ router.get('/', async (req, res) => {
     res.send(exhibitions);
 });
 
+// GET
 router.get('/:id', async(req, res) => {
     const exhibition = await Exhibition.findById(req.params.id);
     if (!exhibition) return res.status(404).send('Exhibition does not exist');
     res.send(exhibition)
 })
 
+// POST
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -32,6 +35,12 @@ router.post('/', async (req, res) => {
         dateUpdated: Date()
     })
     exhibition = await exhibition.save();
+    res.send(exhibition);
+})
+
+router.delete('/:id', async (req, res) => {
+    const exhibition = await Artwork.findByIdAndRemove(req.params.id);
+    if(!exhibition) res.status(404).send("Exhibition does not exist");
     res.send(exhibition);
 })
 
