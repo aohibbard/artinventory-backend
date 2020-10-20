@@ -13,7 +13,10 @@ const Exhibition = mongoose.model('Exhibition', new mongoose.Schema({
     endDate: { type: Date, required: true},
     location: { type: String, required: true},
     city: {type: String},
-    artwork: {},
+    artwork: {
+        type: mongoose.Schema.Types.ArtworkId,
+        ref: 'Artwork'
+    },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
 
