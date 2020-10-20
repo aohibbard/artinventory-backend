@@ -12,7 +12,7 @@ const Exhibition = mongoose.model('Exhibition', new mongoose.Schema({
     },
     startDate: {type: Date, required: true},
     endDate: { type: Date, required: true},
-    location: { type: String, required: true},
+    venue: { type: String, required: true},
     city: {type: String},
     artwork: {
         type: artworkSchema,
@@ -30,7 +30,7 @@ function validateExhibition(exhibition){
         name: Joi.string.min(5).max(200).required(),
         startDate: Joi.date.required(),
         endDate: Joi.date.required(),
-        location: Joi.string.required(),
+        venue: Joi.string.required(),
         city: Joi.string()
     }
     return Joi.validate(exhibition, schema)
