@@ -67,11 +67,11 @@ router.put('/:id', async (res, req) => {
         res.status(500).send('Something went wrong')
     }
 
-
     res.send(artwork)
 })
 
 // GET
+// needs id?
 router.get('/', async (req, res) => {
     const artwork = await Artwork.findById(req.params.id)
     if(!artwork) return res.status(404).send('Artwork does not exist')
