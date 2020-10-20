@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
+const { validateArtwork, artworkSchema } = require('./artwork')
 
 const Exhibition = mongoose.model('Exhibition', new mongoose.Schema({
     // artwork should be an export of artwork schema. have to revise that model
@@ -14,8 +15,9 @@ const Exhibition = mongoose.model('Exhibition', new mongoose.Schema({
     location: { type: String, required: true},
     city: {type: String},
     artwork: {
-        type: mongoose.Schema.Types.ArtworkId,
-        ref: 'Artwork'
+        type: artworkSchema,
+        ref: 'Artwork',
+        require: false
     },
     dateAdded: { type: Date, default: Date.now },
     lastUpdated: { type: Date, default: Date.now }
