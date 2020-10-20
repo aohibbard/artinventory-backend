@@ -31,13 +31,36 @@ router.post('/', async (req, res) => {
         endDate: req.body.endDate,
         venue: req.body.venue,
         city: req.body.city,
-        dateAdded: req.body.dateAdded,
+        dateAdded: Date(),
         dateUpdated: Date()
     })
     exhibition = await exhibition.save();
     res.send(exhibition);
 })
 
+// PUT
+router.put('/:id', async (res, req) => {
+    const {error} = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const exhibition = await Exhibition.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        venue: req.body.venue,
+        city: req.body.city,
+        dateAdded: req.body.dateAdded,
+        dateUpdated: Date()
+    },
+    {new: true}
+    );
+    if (!exhibition) return res.status(404).send("Exhibition does not exist");
+    if (error) return res.status(400).send(error.details[0].message);
+
+    res.send(exhibition);
+})
+
+// DELETE
 router.delete('/:id', async (req, res) => {
     const exhibition = await Artwork.findByIdAndRemove(req.params.id);
     if(!exhibition) res.status(404).send("Exhibition does not exist");
